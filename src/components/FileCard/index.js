@@ -8,7 +8,7 @@ import { serverURL } from "../../utils/constants";
 
 function FileCard({ data, handleRemove }) {
   const host = serverURL.slice(0, serverURL.lastIndexOf("/"));
-  const path = data.source.slice(data.source.indexOf("static"));
+  const path = data.source?.slice(data.source.indexOf("static"));
 
   return (
     <div id={data.record_file_id} className="Card">

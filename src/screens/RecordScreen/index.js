@@ -58,9 +58,15 @@ function RecordScreen() {
       recordCode: Yup.string().required(),
       customerId: Yup.string().required(),
       numberOfBeneficiaries: Yup.number()
-        .required()
-        .min(1, "Debe haber al menos un socio en el expediente")
-        .max(5, "Solo se permiten 5 socios por expediente"),
+      .when("customerType", {
+        is: "LEGAL_PERSON",
+        then: (schema) =>
+          schema
+            .required("Este campo es obligatorio")
+            .min(1, "Debe haber al menos un socio en el expediente")
+            .max(5, "Solo se permiten 5 socios por expediente"),
+        otherwise: (schema) => schema.notRequired(),
+      }),
     }),
     onSubmit: async (values, { resetForm }) => {
       let data = {
@@ -74,7 +80,11 @@ function RecordScreen() {
       };
 
       try {
+        console.log("hi");
+
         let res = await createRecordApi(data);
+
+        console.log(res);
 
         if (res.error === true) {
           throw new Error(res.body);
