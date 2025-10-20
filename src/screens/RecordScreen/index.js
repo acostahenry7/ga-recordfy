@@ -79,6 +79,9 @@ function RecordScreen() {
         parentId: values.parentId,
       };
 
+      console.log(currentBeneficiaries);
+      
+
       try {
         console.log("hi");
 
@@ -155,22 +158,22 @@ function RecordScreen() {
     recordForm.setFieldValue("customerName", `${customer.customer_name}`);
     recordForm.setFieldValue("recordCode", customer.identification_number);
     recordForm.setFieldValue("customerType", customer.customer_type);
-    // if (customer.customer_type == "PHYSICAL_PERSON") {
-    //   setCurrentBenficiaries([
-    //     {
-    //       order: 0,
-    //       beneficiaryType: "PHYSICAL_PERSON",
-    //       name: customer.customer_name,
-    //       identificationType: "PERSONAL_ID",
-    //       identificationNumber: customer.identification_number,
-    //       nationality: 138,
-    //       stocksPercentage: 100,
-    //       isPep: customer.is_pep,
-    //       isPolitician: customer.is_politician,
-    //       isPoliticianRelative: customer.is_politician_relative,
-    //     },
-    //   ]);
-    //}
+    if (customer.customer_type == "PHYSICAL_PERSON") {
+      setCurrentBenficiaries([
+        {
+          order: 0,
+          beneficiaryType: "PHYSICAL_PERSON",
+          name: customer.customer_name,
+          identificationType: "PERSONAL_ID",
+          identificationNumber: customer.identification_number,
+          nationality: 138,
+          stocksPercentage: 100,
+          isPep: customer.is_pep,
+          isPolitician: customer.is_politician,
+          isPoliticianRelative: customer.is_politician_relative,
+        },
+      ]);
+    }
     setSearchedText("");
   };
 
